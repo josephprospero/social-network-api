@@ -20,11 +20,7 @@ const thoughtController = {
     getThoughtsById({ params }, res) {
         Thought.findOne({ _id: params.id })
             .populate({
-                path: 'comments',
-                select: '-__v'
-            })
-            .populate({
-                path: 'friends',
+                path: 'thoughts',
                 select: '-__v'
             })
             .select('-__v')
