@@ -20,9 +20,7 @@ const ReactionSchema = new Schema(
       type: Date,
       default: Date.now,
       get: createdAtVal => dateFormat(createdAtVal)
-    },
-    // use ReplySchema to validate data for a reply
-    replies: [ReplySchema]
+    }
   },
   {
     toJSON: {
@@ -62,10 +60,10 @@ const ThoughtSchema = new Schema(
   }
 );
 
-CommentSchema.virtual('replyCount').get(function () {
+ReactionSchema.virtual('replyCount').get(function () {
   return this.reactions.length;
 });
 
-const Comment = model('User', ThoughtSchema);
+const Thought = model('Thought', ThoughtSchema);
 
 module.exports = Thought;

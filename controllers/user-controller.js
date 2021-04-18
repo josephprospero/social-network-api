@@ -2,14 +2,19 @@ const { User } = require('../models');
 
 const userController = {
     // get all users
-    getAllUsers(req, res) {
+    getAllUsers(req,res) {
         User.find({})
-            .then(dbUserData => res.json(dbUserData))
-            .catch(err => {
-                console.log(err);
-                res.sendStatus(400);
-            });
-    },
+        .populate({
+            path: 'thoughts',
+            select: '-__v'
+         })
+        .select('-__v')
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => {
+            console.log(err)
+            res.status(400).json(err)
+        });
+      },
 
     // get one user by id
     getUserById({ params }, res) {
@@ -59,6 +64,26 @@ const userController = {
             return;
         }
         res.json(dbUserData);
+        })
+        .catch(err => res.status(400).json(err))
+    },
+
+      // create friend
+     addFriend ({ body }, res) {
+        User.create(body)
+            .then(dbThoughtData => res.json(dbThoughtData))
+            .catch(err => res.json(err));
+    },
+
+    // delete friend
+    deleteFriend({ params }, res) {
+        User.findOneAndDelete({ _id: params.id })
+        .then(dbThoughtData => {
+        if (!dbUserData) {
+            res.status(404).json({ message: 'No thought found with this ID!' });
+            return;
+        }
+        res.json(dbThoughtData);
         })
         .catch(err => res.status(400).json(err))
     },
