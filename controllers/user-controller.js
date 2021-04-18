@@ -4,11 +4,6 @@ const userController = {
     // get all users
     getAllUsers(req, res) {
         User.find({})
-            .populate({
-                path: 'thoughts',
-                select: '-__v'
-            })
-            .select('-__v')
             .then(dbUserData => res.json(dbUserData))
             .catch(err => {
                 console.log(err)
@@ -60,7 +55,7 @@ const userController = {
         User.findOneAndDelete({ _id: params.id })
             .then(dbUserData => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with this ID!' });
+                    res.status(404).json({ message: 'User was successfully deleted!' });
                     return;
                 }
                 res.json(dbUserData);
@@ -92,7 +87,7 @@ const userController = {
             { new: true, runValidators: true })
             .then(dbUserData => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with that ID' })
+                    res.status(404).json({ message: 'Friend was successfully removed.' })
                     return;
                 }
                 res.json(dbUserData);

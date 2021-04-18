@@ -60,10 +60,11 @@ const ThoughtSchema = new Schema(
   }
 );
 
-ReactionSchema.virtual('replyCount').get(function () {
+ThoughtSchema.virtual('replyCount').get(function () {
   return this.reactions.length;
 });
 
 const Thought = model('Thought', ThoughtSchema);
+
 
 module.exports = Thought;
