@@ -9,7 +9,7 @@ const thoughtController = {
             select: '-__v'
          })
         .select('-__v')
-        .then(dbThoughtsData => res.json(dbUserData))
+        .then(dbThoughtsData => res.json(dbThoughtsData))
         .catch(err => {
             console.log(err)
             res.status(400).json(err)
@@ -28,7 +28,7 @@ const thoughtController = {
                 select: '-__v'
             })
             .select('-__v')
-            .then(dbThoughtData => res.json(dbThoughtData))
+            .then(dbThoughtsData => res.json(dbThoughtsData))
             .catch(err => {
                 console.log(err);
                 res.sendStatus(400);
@@ -38,7 +38,7 @@ const thoughtController = {
     // createThought
     createThought({ body }, res) {
         Thought.create(body)
-            .then(dbThoughtData => res.json(dbThoughtData))
+            .then(dbThoughtsData => res.json(dbThoughtsData))
             .catch(err => res.json(err));
     },
 
@@ -71,7 +71,7 @@ const thoughtController = {
     // create reaction
     createReaction({ body }, res) {
         Thought.create(body)
-            .then(dbThoughtData => res.json(dbThoughtData))
+            .then(dbThoughtsData => res.json(dbThoughtsData))
             .catch(err => res.json(err));
     },
 
@@ -79,11 +79,11 @@ const thoughtController = {
     deleteReaction({ params }, res) {
         Thought.findOneAndDelete({ _id: params.id })
         .then(dbThoughtData => {
-        if (!dbUserData) {
+        if (!dbThoughtsData) {
             res.status(404).json({ message: 'No thought found with this ID!' });
             return;
         }
-        res.json(dbThoughtData);
+        res.json(dbThoughtsData);
         })
         .catch(err => res.status(400).json(err))
     },
