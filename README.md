@@ -4,7 +4,7 @@ This API is the bones of a typical social media site where you can comment, add 
 
 ## Walkthrough Video
 
-You're watching it!
+https://drive.google.com/file/d/1YEqj6qUD91Ihk5mIPcO7b-zsd8x2nKMA/view?usp=sharing
 
 ## GitHub Repo Link
 https://github.com/josephprospero/social-network-api
